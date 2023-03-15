@@ -5,13 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attachment extends Model
+class Discussion extends Model
 {
     use HasFactory;
-
-    public $fillable = [
-        'project_id',
-        'file_name',
-        'file_path',
-    ];
 }

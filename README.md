@@ -15,7 +15,7 @@ I used the Laravel PHP framework to solve this problem in this first part of the
 There is no need to install anything, just go to the site and rate
 
 #### And if you want to check the code itself I have posted the project in my GitHub page
-1. Clone the repository `git clone https://github.com/UmidAtoyev/basecamp_2.git`
+1. Clone the repository `git clone https://github.com/mxbek/my_basecamp_2.git`
 2. Run `composer install`
 3. Run `php artisan migrate`
 4. Run `npm install`
@@ -27,7 +27,6 @@ There is no need to install anything, just go to the site and rate
 |----------|---------|
 | PHP      | ^8.0.8  |
 | Composer | ^2.1.9  |
-| Laravel  | ^9.0    |
 | MySQL    | ^8.0    |
 | Node     | ^16.5.1 |
 | NPM      | ^9.5    |
@@ -36,7 +35,7 @@ There is no need to install anything, just go to the site and rate
 ## Usage
 Follow the link below to check out my work
 
-Not ready yet
+https://basecamp.qwasar.alphacom.uz/dashboard
 
 To test, we already have 2 users, we will specify the username and password below in the list of users for testing
 
