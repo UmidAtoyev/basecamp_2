@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateTopicRequest extends FormRequest
@@ -11,7 +12,7 @@ class CreateTopicRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,10 +22,19 @@ class CreateTopicRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title' => ['required','string'],
+            'name' => ['required','string'],
         ];
+    }
+
+    /**
+     * @param Validator $validator
+     * Redirect back with errors
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
 }

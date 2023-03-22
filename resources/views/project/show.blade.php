@@ -58,15 +58,15 @@
                     <section id="topics" class="flex flex-col gap-2 mt-7">
                         <h2 class="text-2xl ml-4">Topics</h2>
                         @if($authUser['role'] === 'admin')
-                        <form action="{{ route('topic.store', $project->id) }}" method="POST">
+                        <form action="{{ route('discussion.store', $project->id) }}" method="POST">
                             @csrf
                             <div class="shadow-lg sm:overflow-hidden rounded-xl ring-1 ring-cyan-500">
                                 <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
                                     <div class="grid grid-cols-3 gap-6">
                                         <div class="col-span-3">
-                                            <label for="title" class="block text-sm font-medium text-gray-700">Add new topic</label>
+                                            <label for="name" class="block text-sm font-medium text-gray-700">Add new topic</label>
                                             <div class="mt-1 flex gap-5 rounded-md">
-                                                <input type="text" name="title" id="title" class="block w-full flex-1 rounded-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm" placeholder="Discussion">
+                                                <input type="text" name="name" id="name" class="block w-full flex-1 rounded-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm" placeholder="Discussion">
                                                 <button type="submit" class="inline-flex justify-center rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">Add topic</button>
                                             </div>
                                         </div>
@@ -75,14 +75,14 @@
                             </div>
                         </form>
                         @endif
-                        @if ($project->topics)
+                        @if ($project->discussions)
                             <div class="text-gray-500 mt-5 gap-5 flex flex-col">
                             @foreach($project->topics as $topic)
                                 <div class="relative pointer-events-auto w-full h-52 max-h-full rounded-xl bg-white overflow-hidden text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-cyan-500 cursor-default">
                                     <div class="flex justify-between items-center py-2 px-5 bg-gray-200/50 border-b border-gray-500">
-                                        <div class="font-medium text-slate-900 text-lg">{{ $topic['title'] }}</div>
+                                        <div class="font-medium text-slate-900 text-lg">{{ $topic['name'] }}</div>
                                         @if($authUser['role'] === 'admin')
-                                        <form action="{{ route('topic.destroy', $topic['id']) }}" method="POST">
+                                        <form action="{{ route('discussion.destroy', $topic['id']) }}" method="POST">
                                             <div class="flex items-center gap-2">
                                             @csrf
                                             @method('DELETE')

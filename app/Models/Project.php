@@ -23,6 +23,6 @@ class Project extends Model
 
     public function topics(): HasMany
     {
-        return $this->hasMany(Topic::class);
+        return $this->hasMany(Discussion::class);
     }
 }

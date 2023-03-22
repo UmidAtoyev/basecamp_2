@@ -3,7 +3,7 @@
 
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\TopicsController;
+use App\Http\Controllers\DiscussionsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -20,15 +20,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/project/{id}/leave', [ProjectController::class, 'leave'])->name('project.leave');
     Route::post('/project/{id}/user/{uid}', [ProjectController::class, 'delete'])->name('project.delete');
 
-    Route::post('/project/{id}/topic/store', [TopicsController::class, 'store'])->name('topic.store');
-    Route::get('/topic/{id}/edit', [TopicsController::class, 'edit'])->name('topic.edit');
-    Route::patch('/topic/{id}', [TopicsController::class, 'update'])->name('topic.update');
-    Route::delete('/topic/{id}', [TopicsController::class, 'destroy'])->name('topic.destroy');
+    Route::post('/project/{id}/topic/store', [DiscussionsController::class, 'store'])->name('discussion.store');
+    Route::get('/topic/{id}/edit', [DiscussionsController::class, 'edit'])->name('discussion.edit');
+    Route::patch('/topic/{id}', [DiscussionsController::class, 'update'])->name('discussion.update');
+    Route::delete('/topic/{id}', [DiscussionsController::class, 'destroy'])->name('discussion.destroy');
 
-    Route::post('/topic/{id}/message', [TopicsController::class, 'message'])->name('topic.message');
-    Route::get('/topic/{id}/message/{mid}/edit', [TopicsController::class, 'editMessage'])->name('topic.message.edit');
-    Route::patch('/topic/{id}/message/{mid}', [TopicsController::class, 'updateMessage'])->name('topic.message.update');
-    Route::delete('/topic/{id}/message/{mid}/delete', [TopicsController::class, 'deleteMessage'])->name('topic.message.delete');
+    Route::post('/topic/{id}/message', [DiscussionsController::class, 'message'])->name('topic.message');
+    Route::get('/topic/{id}/message/{mid}/edit', [DiscussionsController::class, 'editMessage'])->name('topic.message.edit');
+    Route::patch('/topic/{id}/message/{mid}', [DiscussionsController::class, 'updateMessage'])->name('topic.message.update');
+    Route::delete('/topic/{id}/message/{mid}/delete', [DiscussionsController::class, 'deleteMessage'])->name('topic.message.delete');
 
     Route::post('/project/{id}/attachment', [AttachmentController::class, 'store'])->name('attachment.store');
     Route::delete('/project/{id}/attachment/{fid}', [AttachmentController::class, 'destroy'])->name('attachment.destroy');

@@ -6,8 +6,8 @@ use App\Http\Requests\CreateProjectRequest;
 use App\Models\Attachment;
 use App\Models\Project;
 use App\Models\ProjectUser;
-use App\Models\Topic;
-use App\Models\TopicMessage;
+use App\Models\Discussion;
+use App\Models\DiscussionMessage;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
@@ -58,13 +58,13 @@ class ProjectController extends Controller
             );
         }
 
-        $projectTopics = Topic::all()->where('project_id', $id);
-        foreach ($projectTopics as $projectTopic) {
-            $topicMessages = TopicMessage::all()->where('topic_id', $projectTopic->id);
-            foreach ($topicMessages as $topicMessage) {
-                $topicMessage->delete();
+        $projectDiscussions = Discussion::all()->where('project_id', $id);
+        foreach ($projectDiscussions as $projectDiscussion) {
+            $discussionMessages = DiscussionMessage::all()->where('discussion_id', $projectDiscussion->id);
+            foreach ($discussionMessages as $discussionMessage) {
+                $discussionMessage->delete();
             }
-            $projectTopic->delete();
+            $projectDiscussion->delete();
         }
 
         $projectUsers = ProjectUser::all()->where('project_id', $id);
@@ -107,12 +107,12 @@ class ProjectController extends Controller
         }
         $project->users = $users;
 
-        $projectTopics = Topic::all()->where('project_id', $id);
-        $topics = [];
-        foreach ($projectTopics as $topic) {
-            $topicMessages = TopicMessage::all()->where('topic_id', $topic->id);
+        $projectTopics = Discussion::all()->where('project_id', $id);
+        $discussions = [];
+        foreach ($projectTopics as $discussion) {
+            $discussionMessages = DiscussionMessage::all()->where('discussion_id', $discussion->id);
             $messages = [];
-            foreach ($topicMessages as $message) {
+            foreach ($discussionMessages as $message) {
                 $messageUser = User::find($message->user_id);
                 $messages[] = [
                     'id' => $message->id,
@@ -124,13 +124,13 @@ class ProjectController extends Controller
                     ],
                 ];
             }
-            $topics[] = [
-                'id' => $topic->id,
-                'title' => $topic->title,
+            $discussions[] = [
+                'id' => $discussion->id,
+                'title' => $discussion->title,
                 'messages' => $messages,
             ];
         }
-        $project->topics = $topics;
+        $project->discussions = $discussions;
 
         $projectAttachments = Attachment::all()->where('project_id', $id);
         $attachments = [];
